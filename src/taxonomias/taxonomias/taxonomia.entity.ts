@@ -232,16 +232,22 @@ export class Especie {
     nome: string;
 
     @ApiModelProperty()
+    @Column("bool", {
+        nullable: false,
+    })
+    e_sinonimo: boolean;
+
+    // @ApiModelProperty()
     @ManyToOne((type) => Genero, { nullable: false })
     @JoinColumn({ name: "id_genero", referencedColumnName: "id_genero" })
     public genero: Genero;
 
-    @ApiModelProperty()
+    //@ApiModelProperty()
     @ManyToOne((type) => Subgenero, { nullable: false })
     @JoinColumn({ name: "id_subgenero", referencedColumnName: "id_subgenero" })
     public subgenero: Subgenero;
 
-    @ApiModelProperty()
+    //@ApiModelProperty()
     @ManyToOne((type) => Pessoa, { nullable: false })
     @JoinColumn({ name: "id_pessoa", referencedColumnName: "id_pessoa" })
     public pessoa: Pessoa;

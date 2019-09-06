@@ -69,7 +69,6 @@ export class TaxonomiasService {
             cache: true,
             relations: ["reino"],
         });
-        console.log(tmp);
         return tmp;
     }
 
@@ -79,7 +78,6 @@ export class TaxonomiasService {
     }
 
     public async filoUpdate(data: Filo): Promise<UpdateResult> {
-        //console.log("11111", data.id);
         return await this.filoRepository.update(data.id_filo, { nome: data.nome, reino: data.reino });
     }
 
@@ -206,7 +204,6 @@ export class TaxonomiasService {
     }
 
     public async triboUpdate(data: Tribo): Promise<UpdateResult> {
-        console.log(data);
         //if (data.supertribo == "") data.supertribo = null;
         //if (data.subtribo == "") data.subtribo = null;
         return await this.triboRepository.update(data.id_tribo, {
@@ -294,7 +291,9 @@ export class TaxonomiasService {
 
     //SUB GENERO REPOSITORY
     public async especieFindAll(): Promise<Especie[]> {
-        return await this.especieRepository.find();
+        return await this.especieRepository.find({
+            relations: ["genero", "subgenero", "parent_id_especie"],
+        });
     }
 
     public async especieCreate(data: Especie): Promise<Especie> {
@@ -303,7 +302,13 @@ export class TaxonomiasService {
     }
 
     public async especieUpdate(data: Especie): Promise<UpdateResult> {
-        return await this.especieRepository.update(data.id_especie, data);
+        return await this.especieRepository.update(data.id_especie, {
+            nome: data.nome,
+            genero: data.genero,
+            subgenero: data.subgenero,
+            e_sinonimo: data.e_sinonimo,
+            parent_id_especie: data.parent_id_especie,
+        });
     }
 
     public async especieDelete(id): Promise<DeleteResult> {

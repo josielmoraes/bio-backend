@@ -53,7 +53,6 @@ export class TaxonomiasController {
 
     @Put("filo/:id/update")
     public async filoUpdate(@Param("id") id, @Body() data: Filo): Promise<any> {
-        console.log(id);
         data.id_filo = Number(id);
         return this.taxonomiaService.filoUpdate(data);
     }
@@ -233,7 +232,6 @@ export class TaxonomiasController {
     //SUBGENERO ROTAS
     @Get("subgenero")
     public subGeneroIndex(): Promise<Subgenero[]> {
-        console.log("asdasd");
         return this.taxonomiaService.subGeneroFindAll();
     }
 
