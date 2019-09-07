@@ -19,7 +19,7 @@ export class PessoasController {
 
     @Put(":id/update")
     public async update(@Param("id") id, @Body() pessoaData: Pessoa): Promise<any> {
-        pessoaData.id_pessoa = Number(id);
+        pessoaData.id = Number(id);
         return this.pessoasService.update(pessoaData);
     }
     @Delete(":id/delete")

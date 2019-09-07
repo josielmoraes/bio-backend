@@ -16,12 +16,12 @@ export class ColecoesService {
     }
 
     public async create(data: Colecao): Promise<Colecao> {
-        data.id_colecao = null;
+        data.id = null;
         return await this.colecaoRepository.save(data);
     }
 
     public async update(data: Colecao): Promise<UpdateResult> {
-        return await this.colecaoRepository.update(data.id_colecao, data);
+        return await this.colecaoRepository.update(data.id, data);
     }
 
     public async delete(id): Promise<DeleteResult> {

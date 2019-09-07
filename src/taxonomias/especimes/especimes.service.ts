@@ -15,12 +15,12 @@ export class EspecimesService {
     }
 
     public async create(especimeData: Especime): Promise<Especime> {
-        especimeData.id_especimes = null;
+        especimeData.id = null;
         return await this.especimeRepository.save(especimeData);
     }
 
     public async update(especimeData: Especime): Promise<UpdateResult> {
-        return await this.especimeRepository.update(especimeData.id_especimes, especimeData);
+        return await this.especimeRepository.update(especimeData.id, especimeData);
     }
 
     public async delete(id): Promise<DeleteResult> {

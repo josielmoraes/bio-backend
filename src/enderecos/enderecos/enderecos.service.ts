@@ -15,12 +15,12 @@ export class EnderecosService {
     }
 
     public async create(endereco: Endereco): Promise<Endereco> {
-        endereco.id_endereco = null;
+        endereco.id = null;
         return await this.enderecoRepository.save(endereco);
     }
 
     public async update(endereco: Endereco): Promise<UpdateResult> {
-        return await this.enderecoRepository.update(endereco.id_endereco, endereco);
+        return await this.enderecoRepository.update(endereco.id, endereco);
     }
 
     public async delete(id): Promise<DeleteResult> {

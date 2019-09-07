@@ -18,7 +18,7 @@ export class ColecoesController {
 
     @Put(":id/update")
     public async update(@Param("id") id, @Body() data: Colecao): Promise<any> {
-        data.id_colecao = Number(id);
+        data.id = Number(id);
         return this.colecaoService.update(data);
     }
     @Delete(":id/delete")

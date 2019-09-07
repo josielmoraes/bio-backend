@@ -18,7 +18,7 @@ export class InstituicoesController {
 
     @Put(":id/update")
     public async update(@Param("id") id, @Body() instituicaoData: Instituicao): Promise<any> {
-        instituicaoData.id_instituicao = Number(id);
+        instituicaoData.id = Number(id);
         return this.instituicaoService.update(instituicaoData);
     }
     @Delete(":id/delete")

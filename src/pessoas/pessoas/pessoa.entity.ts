@@ -1,19 +1,34 @@
 import { Instituicao } from "./../../instituicoes/instituicoes/instituicao.entity";
 import { Endereco } from "./../../enderecos/enderecos/endereco.entity";
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany } from "typeorm";
 import { ApiModelProperty } from "@nestjs/swagger";
+import {
+    PessoaReino,
+    PessoaFilo,
+    PessoaClasse,
+    PessoaOrdem,
+    PessoaFamilia,
+    PessoaSubfamilia,
+    PessoaSupertribo,
+    PessoaTribo,
+    PessoaSubtribo,
+    PessoaGenero,
+    PessoaSubgenero,
+    PessoaEspecie,
+    PessoaTrabalho,
+} from "./relacaoPessoas.entity";
 
-@Entity("pessoas")
+@Entity("pessoa")
 export class Pessoa {
     @ApiModelProperty()
-    @PrimaryGeneratedColumn({ type: "bigint" })
-    id_pessoa: number;
+    @PrimaryGeneratedColumn({ name: "id_pessoa", type: "bigint" })
+    id: number;
 
     @ApiModelProperty()
     @Column("character varying", {
         nullable: true,
     })
-    short_name: string;
+    nome_curto: string;
 
     @ApiModelProperty()
     @Column("character varying", {
@@ -25,7 +40,7 @@ export class Pessoa {
     @Column("character varying", {
         nullable: true,
     })
-    full_name: string;
+    nome_completo: string;
 
     @ApiModelProperty()
     @Column("character varying", {
@@ -77,11 +92,50 @@ export class Pessoa {
 
     @ApiModelProperty()
     @ManyToOne((type) => Endereco)
-    @JoinColumn({ name: "id_endereco", referencedColumnName: "id_endereco" })
+    @JoinColumn({ name: "id_endereco", referencedColumnName: "id" })
     public endereco: Endereco;
 
     @ApiModelProperty()
     @ManyToOne((type) => Instituicao)
-    @JoinColumn({ name: "id_instituicao", referencedColumnName: "id_instituicao" })
+    @JoinColumn({ name: "id_instituicao", referencedColumnName: "id" })
     public id_instituicao: Instituicao;
+
+    @OneToMany(() => PessoaReino, (pessorareino) => pessorareino.pessoa)
+    public pessorareino: PessoaReino[];
+
+    @OneToMany(() => PessoaFilo, (pessoafilo) => pessoafilo.pessoa)
+    public pessoafilo: PessoaFilo[];
+
+    @OneToMany(() => PessoaClasse, (pessoaclasse) => pessoaclasse.pessoa)
+    public pessoaclasse: PessoaClasse[];
+
+    @OneToMany(() => PessoaOrdem, (pessoaordem) => pessoaordem.pessoa)
+    public pessoaordem: PessoaOrdem[];
+
+    @OneToMany(() => PessoaFamilia, (pessoafamilia) => pessoafamilia.pessoa)
+    public pessoafamilia: PessoaFamilia[];
+
+    @OneToMany(() => PessoaSubfamilia, (pessoasubfamilia) => pessoasubfamilia.pessoa)
+    public pessoasubfamilia: PessoaSubfamilia[];
+
+    @OneToMany(() => PessoaSupertribo, (pessoasupertribo) => pessoasupertribo.pessoa)
+    public pessoasupertribo: PessoaSupertribo[];
+
+    @OneToMany(() => PessoaTribo, (pessoatribo) => pessoatribo.pessoa)
+    public pessoatribo: PessoaTribo[];
+
+    @OneToMany(() => PessoaSubtribo, (pessoasubtribo) => pessoasubtribo.pessoa)
+    public pessoasubtribo: PessoaSubtribo[];
+
+    @OneToMany(() => PessoaGenero, (pessoagenero) => pessoagenero.pessoa)
+    public pessoagenero: PessoaGenero[];
+
+    @OneToMany(() => PessoaSubgenero, (pessoasubgenero) => pessoasubgenero.pessoa)
+    public pessoasubgenero: PessoaSubgenero[];
+
+    @OneToMany(() => PessoaEspecie, (pessoaespecie) => pessoaespecie.pessoa)
+    public pessoaespecie: PessoaEspecie[];
+
+    @OneToMany(() => PessoaTrabalho, (pessoatrabalho) => pessoatrabalho.pessoa)
+    public pessoatrabalho: PessoaTrabalho[];
 }

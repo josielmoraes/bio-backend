@@ -15,12 +15,12 @@ export class LocalidadesService {
     }
 
     public async create(localidade: Localidade): Promise<Localidade> {
-        localidade.id_localidade = null;
+        localidade.id = null;
         return await this.enderecoRepository.save(localidade);
     }
 
     public async update(localidade: Localidade): Promise<UpdateResult> {
-        return await this.enderecoRepository.update(localidade.id_localidade, localidade);
+        return await this.enderecoRepository.update(localidade.id, localidade);
     }
 
     public async delete(id): Promise<DeleteResult> {

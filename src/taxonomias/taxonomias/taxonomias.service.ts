@@ -51,12 +51,12 @@ export class TaxonomiasService {
     }
 
     public async reinoCreate(data: Reino): Promise<Reino> {
-        data.id_reino = null;
+        data.id = null;
         return await this.reinoRepository.save(data);
     }
 
     public async reinoUpdate(data: Reino): Promise<UpdateResult> {
-        return await this.reinoRepository.update(data.id_reino, { nome: data.nome });
+        return await this.reinoRepository.update(data.id, { nome: data.nome });
     }
 
     public async reinoDelete(id): Promise<DeleteResult> {
@@ -74,13 +74,13 @@ export class TaxonomiasService {
     }
 
     public async filoCreate(data: Filo): Promise<Filo> {
-        data.id_filo = null;
+        data.id = null;
         return await this.filoRepository.save(data);
     }
 
     public async filoUpdate(data: Filo): Promise<UpdateResult> {
         //console.log("11111", data.id);
-        return await this.filoRepository.update(data.id_filo, { nome: data.nome, reino: data.reino });
+        return await this.filoRepository.update(data.id, { nome: data.nome, reino: data.reino });
     }
 
     public async filoDelete(id): Promise<DeleteResult> {
@@ -97,12 +97,12 @@ export class TaxonomiasService {
     }
 
     public async classeCreate(data: Classe): Promise<Classe> {
-        data.id_classe = null;
+        data.id = null;
         return await this.classeRepository.save(data);
     }
 
     public async classeUpdate(data: Classe): Promise<UpdateResult> {
-        return await this.classeRepository.update(data.id_classe, { nome: data.nome, filo: data.filo });
+        return await this.classeRepository.update(data.id, { nome: data.nome, filo: data.filo });
     }
 
     public async classeDelete(id): Promise<DeleteResult> {
@@ -117,12 +117,12 @@ export class TaxonomiasService {
     }
 
     public async ordemCreate(data: Ordem): Promise<Ordem> {
-        data.id_ordem = null;
+        data.id = null;
         return await this.ordemRepository.save(data);
     }
 
     public async ordemUpdate(data: Ordem): Promise<UpdateResult> {
-        return await this.ordemRepository.update(data.id_ordem, { nome: data.nome, classe: data.classe });
+        return await this.ordemRepository.update(data.id, { nome: data.nome, classe: data.classe });
     }
 
     public async ordemDelete(id): Promise<DeleteResult> {
@@ -137,12 +137,12 @@ export class TaxonomiasService {
     }
 
     public async familiaCreate(data: Familia): Promise<Familia> {
-        data.id_familia = null;
+        data.id = null;
         return await this.familiaRepository.save(data);
     }
 
     public async familiaUpdate(data: Familia): Promise<UpdateResult> {
-        return await this.familiaRepository.update(data.id_familia, { nome: data.nome, ordem: data.ordem });
+        return await this.familiaRepository.update(data.id, { nome: data.nome, ordem: data.ordem });
     }
 
     public async familiaDelete(id): Promise<DeleteResult> {
@@ -157,12 +157,12 @@ export class TaxonomiasService {
     }
 
     public async subFamiliaCreate(data: Subfamilia): Promise<Subfamilia> {
-        data.id_subfamilia = null;
+        data.id = null;
         return await this.subFamiliaRepository.save(data);
     }
 
     public async subFamiliaUpdate(data: Subfamilia): Promise<UpdateResult> {
-        return await this.subFamiliaRepository.update(data.id_subfamilia, { nome: data.nome, familia: data.familia });
+        return await this.subFamiliaRepository.update(data.id, { nome: data.nome, familia: data.familia });
     }
 
     public async subFamiliaDelete(id): Promise<DeleteResult> {
@@ -177,12 +177,12 @@ export class TaxonomiasService {
     }
 
     public async superTriboCreate(data: Supertribo): Promise<Supertribo> {
-        data.id_supertribo = null;
+        data.id = null;
         return await this.superTriboRepository.save(data);
     }
 
     public async superTriboUpdate(data: Supertribo): Promise<UpdateResult> {
-        return await this.superTriboRepository.update(data.id_supertribo, {
+        return await this.superTriboRepository.update(data.id, {
             nome: data.nome,
             familia: data.familia,
             subfamilia: data.subfamilia,
@@ -201,7 +201,7 @@ export class TaxonomiasService {
     }
 
     public async triboCreate(data: Tribo): Promise<Tribo> {
-        data.id_tribo = null;
+        data.id = null;
         return await this.triboRepository.save(data);
     }
 
@@ -209,7 +209,7 @@ export class TaxonomiasService {
         console.log(data);
         //if (data.supertribo == "") data.supertribo = null;
         //if (data.subtribo == "") data.subtribo = null;
-        return await this.triboRepository.update(data.id_tribo, {
+        return await this.triboRepository.update(data.id, {
             nome: data.nome,
             familia: data.familia,
             subfamilia: data.subfamilia,
@@ -229,12 +229,12 @@ export class TaxonomiasService {
     }
 
     public async subTriboCreate(data: Subtribo): Promise<Subtribo> {
-        data.id_subtribo = null;
+        data.id = null;
         return await this.subTriboRepository.save(data);
     }
 
     public async subTriboUpdate(data: Subtribo): Promise<UpdateResult> {
-        return await this.subTriboRepository.update(data.id_subtribo, {
+        return await this.subTriboRepository.update(data.id, {
             nome: data.nome,
             tribo: data.tribo,
         });
@@ -252,12 +252,12 @@ export class TaxonomiasService {
     }
 
     public async generoCreate(data: Genero): Promise<Genero> {
-        data.id_genero = null;
+        data.id = null;
         return await this.generoRepository.save(data);
     }
 
     public async generoUpdate(data: Genero): Promise<UpdateResult> {
-        return await this.generoRepository.update(data.id_genero, {
+        return await this.generoRepository.update(data.id, {
             nome: data.nome,
             tribo: data.tribo,
             subtribo: data.subtribo,
@@ -277,12 +277,12 @@ export class TaxonomiasService {
     }
 
     public async subGeneroCreate(data: Subgenero): Promise<Subgenero> {
-        data.id_subgenero = null;
+        data.id = null;
         return await this.subGeneroRepository.save(data);
     }
 
     public async subGeneroUpdate(data: Subgenero): Promise<UpdateResult> {
-        return await this.subGeneroRepository.update(data.id_subgenero, {
+        return await this.subGeneroRepository.update(data.id, {
             nome: data.nome,
             genero: data.genero,
         });
@@ -298,12 +298,12 @@ export class TaxonomiasService {
     }
 
     public async especieCreate(data: Especie): Promise<Especie> {
-        data.id_especie = null;
+        data.id = null;
         return await this.especieRepository.save(data);
     }
 
     public async especieUpdate(data: Especie): Promise<UpdateResult> {
-        return await this.especieRepository.update(data.id_especie, data);
+        return await this.especieRepository.update(data.id, data);
     }
 
     public async especieDelete(id): Promise<DeleteResult> {

@@ -32,7 +32,7 @@ export class TaxonomiasController {
 
     @Put("reino/:id/update")
     public async reinoUpdate(@Param("id") id, @Body() data: Reino): Promise<any> {
-        data.id_reino = Number(id);
+        data.id = Number(id);
         return this.taxonomiaService.reinoUpdate(data);
     }
     @Delete("reino/:id/delete")
@@ -54,7 +54,7 @@ export class TaxonomiasController {
     @Put("filo/:id/update")
     public async filoUpdate(@Param("id") id, @Body() data: Filo): Promise<any> {
         console.log(id);
-        data.id_filo = Number(id);
+        data.id = Number(id);
         return this.taxonomiaService.filoUpdate(data);
     }
     @Delete("filo/:id/delete")
@@ -75,7 +75,7 @@ export class TaxonomiasController {
 
     @Put("classe/:id/update")
     public async classeUpdate(@Param("id") id, @Body() data: Classe): Promise<any> {
-        data.id_classe = Number(id);
+        data.id = Number(id);
         return this.taxonomiaService.classeUpdate(data);
     }
     @Delete("classe/:id/delete")
@@ -96,7 +96,7 @@ export class TaxonomiasController {
 
     @Put("ordem/:id/update")
     public async ordemUpdate(@Param("id") id, @Body() data: Ordem): Promise<any> {
-        data.id_ordem = Number(id);
+        data.id = Number(id);
         return this.taxonomiaService.ordemUpdate(data);
     }
     @Delete("ordem/:id/delete")
@@ -117,7 +117,7 @@ export class TaxonomiasController {
 
     @Put("familia/:id/update")
     public async familiaUpdate(@Param("id") id, @Body() data: Familia): Promise<any> {
-        data.id_familia = Number(id);
+        data.id = Number(id);
         return this.taxonomiaService.familiaUpdate(data);
     }
     @Delete("familia/:id/delete")
@@ -138,7 +138,7 @@ export class TaxonomiasController {
 
     @Put("subfamilia/:id/update")
     public async subfamiliaUpdate(@Param("id") id, @Body() data: Subfamilia): Promise<any> {
-        data.id_subfamilia = Number(id);
+        data.id = Number(id);
         return this.taxonomiaService.subFamiliaUpdate(data);
     }
     @Delete("subfamilia/:id/delete")
@@ -159,7 +159,7 @@ export class TaxonomiasController {
 
     @Put("supertribo/:id/update")
     public async superTriboUpdate(@Param("id") id, @Body() data: Supertribo): Promise<any> {
-        data.id_supertribo = Number(id);
+        data.id = Number(id);
         return this.taxonomiaService.superTriboUpdate(data);
     }
     @Delete("supertribo/:id/delete")
@@ -180,7 +180,7 @@ export class TaxonomiasController {
 
     @Put("tribo/:id/update")
     public async triboUpdate(@Param("id") id, @Body() data: Tribo): Promise<any> {
-        data.id_tribo = Number(id);
+        data.id = Number(id);
         return this.taxonomiaService.triboUpdate(data);
     }
     @Delete("tribo/:id/delete")
@@ -201,7 +201,7 @@ export class TaxonomiasController {
 
     @Put("subtribo/:id/update")
     public async subTriboUpdate(@Param("id") id, @Body() data: Subtribo): Promise<any> {
-        data.id_subtribo = Number(id);
+        data.id = Number(id);
         return this.taxonomiaService.subTriboUpdate(data);
     }
     @Delete("subtribo/:id/delete")
@@ -222,7 +222,7 @@ export class TaxonomiasController {
 
     @Put("genero/:id/update")
     public async generooUpdate(@Param("id") id, @Body() data: Genero): Promise<any> {
-        data.id_genero = Number(id);
+        data.id = Number(id);
         return this.taxonomiaService.generoUpdate(data);
     }
     @Delete("genero/:id/delete")
@@ -244,7 +244,7 @@ export class TaxonomiasController {
 
     @Put("subgenero/:id/update")
     public async subGeneroUpdate(@Param("id") id, @Body() data: Subgenero): Promise<any> {
-        data.id_subgenero = Number(id);
+        data.id = Number(id);
         return this.taxonomiaService.subGeneroUpdate(data);
     }
     @Delete("subgenero/:id/delete")
@@ -265,7 +265,7 @@ export class TaxonomiasController {
 
     @Put("especie/:id/update")
     public async especieUpdate(@Param("id") id, @Body() data: Especie): Promise<any> {
-        data.id_especie = Number(id);
+        data.id = Number(id);
         return this.taxonomiaService.especieUpdate(data);
     }
     @Delete("especie/:id/delete")

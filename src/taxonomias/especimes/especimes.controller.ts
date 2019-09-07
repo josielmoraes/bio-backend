@@ -14,16 +14,12 @@ export class EspecimesController {
 
     @Post("create")
     public async create(@Body() data: Especime): Promise<any> {
-        const registro = new Registro();
-        registro.id_registro = Number(data.registros[0]);
-        data.registros = [];
-        data.registros.push(registro);
         return this.especimeService.create(data);
     }
 
     @Put(":id/update")
     public async update(@Param("id") id, @Body() data: Especime): Promise<any> {
-        data.id_especimes = Number(id);
+        data.id = Number(id);
         return this.especimeService.update(data);
     }
     @Delete(":id/delete")

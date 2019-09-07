@@ -17,7 +17,7 @@ export class EnderecosController {
 
     @Put(":id/update")
     public async update(@Param("id") id, @Body() enderecoData: Endereco): Promise<any> {
-        enderecoData.id_endereco = Number(id);
+        enderecoData.id = Number(id);
         return this.enderecoService.update(enderecoData);
     }
     @Delete(":id/delete")

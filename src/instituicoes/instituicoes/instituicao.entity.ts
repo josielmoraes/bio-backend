@@ -6,64 +6,64 @@ import { ApiModelProperty } from "@nestjs/swagger";
 @Entity("instituicao")
 export class Instituicao {
     @ApiModelProperty()
-    @PrimaryGeneratedColumn({ type: "bigint" })
-    id_instituicao: number;
+    @PrimaryGeneratedColumn({ name: "id_instituicao", type: "bigint" })
+    id: number;
 
     @ApiModelProperty()
     @Column("character varying", {
-        nullable: false,
+        nullable: true,
     })
     nome: string;
 
     @ApiModelProperty()
     @Column("character varying", {
-        nullable: false,
+        nullable: true,
     })
     telefone: string;
 
     @ApiModelProperty()
     @Column("character varying", {
-        nullable: false,
+        nullable: true,
     })
     website: string;
 
     @ApiModelProperty()
     @Column("character varying", {
-        nullable: false,
+        nullable: true,
     })
     redes_sociais: string;
 
     @ApiModelProperty()
     @Column("character varying", {
-        nullable: false,
+        nullable: true,
     })
     fax: string;
 
     @ApiModelProperty()
     @Column("character varying", {
-        nullable: false,
+        nullable: true,
     })
     endereco: string;
 
     @ApiModelProperty()
     @Column("character varying", {
-        nullable: false,
+        nullable: true,
     })
     anotacao: string;
 
     @ApiModelProperty()
     @Column("character varying", {
-        nullable: false,
+        nullable: true,
     })
     acronimo: string;
 
     //@ApiModelProperty()
-    @ManyToOne((type) => Localidade, { nullable: false })
-    @JoinColumn({ name: "id_localidade", referencedColumnName: "id_localidade" })
+    @ManyToOne((type) => Localidade, { nullable: true })
+    @JoinColumn({ name: "id_localidade", referencedColumnName: "id" })
     public localidade: Localidade;
 
     @ApiModelProperty()
-    @ManyToOne((type) => Endereco, { nullable: false })
-    @JoinColumn({ name: "id_endereco", referencedColumnName: "id_endereco" })
+    @ManyToOne((type) => Endereco, { nullable: true })
+    @JoinColumn({ name: "id_endereco", referencedColumnName: "id" })
     public id_endereco: Endereco;
 }

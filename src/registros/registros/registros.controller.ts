@@ -19,7 +19,7 @@ export class RegistrosController {
 
     @Put(":id/update")
     public async update(@Param("id") id, @Body() data: Registro): Promise<any> {
-        data.id_registro = Number(id);
+        data.id = Number(id);
         return this.registroService.update(data);
     }
     @Delete(":id/delete")

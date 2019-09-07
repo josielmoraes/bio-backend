@@ -18,7 +18,7 @@ export class LocalidadesController {
 
     @Put(":id/update")
     public async update(@Param("id") id, @Body() localidadeData: Localidade): Promise<any> {
-        localidadeData.id_localidade = Number(id);
+        localidadeData.id = Number(id);
         return this.localidadeService.update(localidadeData);
     }
     @Delete(":id/delete")

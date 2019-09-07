@@ -16,12 +16,12 @@ export class RegistrosService {
     }
 
     public async create(data: Registro): Promise<Registro> {
-        data.id_registro = null;
+        data.id = null;
         return await this.registroRepository.save(data);
     }
 
     public async update(data: Registro): Promise<UpdateResult> {
-        return await this.registroRepository.update(data.id_registro, data);
+        return await this.registroRepository.update(data.id, data);
     }
 
     public async delete(id): Promise<DeleteResult> {

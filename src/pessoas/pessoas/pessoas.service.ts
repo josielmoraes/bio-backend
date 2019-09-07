@@ -15,14 +15,14 @@ export class PessoasService {
     }
 
     public async create(pessoa: Pessoa): Promise<Pessoa> {
-        console.log(pessoa);
+        pessoa.id = null;
         const tmp = await this.pessoaRepository.save(pessoa);
 
         return tmp;
     }
 
     public async update(pessoa: Pessoa): Promise<UpdateResult> {
-        return await this.pessoaRepository.update(pessoa.id_pessoa, pessoa);
+        return await this.pessoaRepository.update(pessoa.id, pessoa);
     }
 
     public async delete(id): Promise<DeleteResult> {

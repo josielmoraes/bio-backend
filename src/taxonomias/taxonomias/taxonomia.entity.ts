@@ -1,253 +1,416 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, JoinColumn } from "typeorm";
+import {
+    Entity,
+    PrimaryGeneratedColumn,
+    Column,
+    OneToMany,
+    ManyToOne,
+    JoinColumn,
+    ManyToMany,
+    JoinTable,
+} from "typeorm";
 import { ApiModelProperty } from "@nestjs/swagger";
 import { Pessoa } from "../../pessoas/pessoas/pessoa.entity";
-@Entity("reinos")
+import {
+    PessoaReino,
+    PessoaFilo,
+    PessoaClasse,
+    PessoaOrdem,
+    PessoaFamilia,
+    PessoaSubfamilia,
+    PessoaSupertribo,
+    PessoaTribo,
+    PessoaSubtribo,
+    PessoaGenero,
+    PessoaSubgenero,
+    PessoaEspecie,
+} from "../../pessoas/pessoas/relacaoPessoas.entity";
+import { Trabalho } from "../../trabalhos/trabalhos/trabalho.entity";
+
+@Entity("reino")
 export class Reino {
     @ApiModelProperty()
-    @PrimaryGeneratedColumn({ type: "bigint" })
-    id_reino: number;
+    @PrimaryGeneratedColumn({ name: "id_reino", type: "bigint" })
+    id: number;
 
     @ApiModelProperty()
     @Column("character varying", {
-        nullable: false,
+        nullable: true,
     })
     nome: string;
+
+    @ApiModelProperty()
+    @Column("integer", {
+        nullable: true,
+    })
+    ano_descricao: number;
+
+    @ApiModelProperty()
+    @OneToMany(() => PessoaReino, (reinopessoa) => reinopessoa.reino, { cascade: true })
+    public reinopessoa: PessoaReino[];
 }
 
-@Entity("filos")
+@Entity("filo")
 export class Filo {
     @ApiModelProperty()
     @PrimaryGeneratedColumn({ name: "id_filo", type: "bigint" })
-    id_filo: number;
+    id: number;
 
     @ApiModelProperty()
     @Column("character varying", {
-        nullable: false,
+        nullable: true,
     })
     nome: string;
+
+    @ApiModelProperty()
+    @Column("integer", {
+        nullable: true,
+    })
+    ano_descricao: number;
 
     @ApiModelProperty()
     @ManyToOne((type) => Reino)
-    @JoinColumn({ name: "id_reino", referencedColumnName: "id_reino" })
+    @JoinColumn({ name: "id_reino", referencedColumnName: "id" })
     public reino: Reino;
+
+    @ApiModelProperty()
+    @OneToMany(() => PessoaFilo, (reinopessoa) => reinopessoa.filo, { cascade: true })
+    public filopessoa: PessoaFilo[];
 }
 
-@Entity("classes")
+@Entity("classe")
 export class Classe {
     @ApiModelProperty()
-    @PrimaryGeneratedColumn({ type: "bigint" })
-    id_classe: number;
+    @PrimaryGeneratedColumn({ name: "id_classe", type: "bigint" })
+    id: number;
 
     @ApiModelProperty()
     @Column("character varying", {
-        nullable: false,
+        nullable: true,
     })
     nome: string;
 
     @ApiModelProperty()
-    @ManyToOne((type) => Filo, { nullable: false })
-    @JoinColumn({ name: "id_filo", referencedColumnName: "id_filo" })
+    @Column("integer", {
+        nullable: true,
+    })
+    ano_descricao: number;
+
+    @ApiModelProperty()
+    @ManyToOne((type) => Filo, { nullable: true })
+    @JoinColumn({ name: "id_filo", referencedColumnName: "id" })
     public filo: Filo;
+
+    @ApiModelProperty()
+    @OneToMany(() => PessoaClasse, (classepessoa) => classepessoa.classe, { cascade: true })
+    public classepessoa: PessoaClasse[];
 }
 
-@Entity("ordens")
+@Entity("ordem")
 export class Ordem {
     @ApiModelProperty()
-    @PrimaryGeneratedColumn({ type: "bigint" })
-    id_ordem: number;
+    @PrimaryGeneratedColumn({ name: "id_ordem", type: "bigint" })
+    id: number;
 
     @ApiModelProperty()
     @Column("character varying", {
-        nullable: false,
+        nullable: true,
     })
     nome: string;
 
     @ApiModelProperty()
-    @ManyToOne((type) => Classe, { nullable: false })
-    @JoinColumn({ name: "id_classe", referencedColumnName: "id_classe" })
+    @Column("integer", {
+        nullable: true,
+    })
+    ano_descricao: number;
+
+    @ApiModelProperty()
+    @ManyToOne((type) => Classe, { nullable: true })
+    @JoinColumn({ name: "id_classe", referencedColumnName: "id" })
     public classe: Classe;
+
+    @ApiModelProperty()
+    @OneToMany(() => PessoaOrdem, (ordempessoa) => ordempessoa.ordem, { cascade: true })
+    public ordempessoa: PessoaOrdem[];
 }
 
-@Entity("familias")
+@Entity("familia")
 export class Familia {
     @ApiModelProperty()
-    @PrimaryGeneratedColumn({ type: "bigint" })
-    id_familia: number;
+    @PrimaryGeneratedColumn({ name: "id_familia", type: "bigint" })
+    id: number;
 
     @ApiModelProperty()
     @Column("character varying", {
-        nullable: false,
+        nullable: true,
     })
     nome: string;
 
     @ApiModelProperty()
-    @ManyToOne((type) => Ordem, { nullable: false })
-    @JoinColumn({ name: "id_ordem", referencedColumnName: "id_ordem" })
+    @Column("integer", {
+        nullable: true,
+    })
+    ano_descricao: number;
+
+    @ApiModelProperty()
+    @ManyToOne((type) => Ordem, { nullable: true })
+    @JoinColumn({ name: "id_ordem", referencedColumnName: "id" })
     public ordem: Ordem;
+
+    @ApiModelProperty()
+    @OneToMany(() => PessoaFamilia, (familiapessoa) => familiapessoa.familia, { cascade: true })
+    public familiapessoa: PessoaFamilia[];
 }
 
-@Entity("subfamilias")
+@Entity("subfamilia")
 export class Subfamilia {
     @ApiModelProperty()
-    @PrimaryGeneratedColumn({ type: "bigint" })
-    id_subfamilia: number;
+    @PrimaryGeneratedColumn({ name: "id_subfamilia", type: "bigint" })
+    id: number;
 
     @ApiModelProperty()
     @Column("character varying", {
-        nullable: false,
+        nullable: true,
     })
     nome: string;
 
     @ApiModelProperty()
-    @ManyToOne((type) => Familia, { nullable: false })
-    @JoinColumn({ name: "id_familia", referencedColumnName: "id_familia" })
+    @Column("integer", {
+        nullable: true,
+    })
+    ano_descricao: number;
+
+    @ApiModelProperty()
+    @ManyToOne((type) => Familia, { nullable: true })
+    @JoinColumn({ name: "id_familia", referencedColumnName: "id" })
     public familia: Familia;
+
+    @ApiModelProperty()
+    @OneToMany(() => PessoaSubfamilia, (subfamiliapessoa) => subfamiliapessoa.subfamilia, { cascade: true })
+    public subfamiliapessoa: PessoaSubfamilia[];
 }
 
-@Entity("supertribos")
+@Entity("supertribo")
 export class Supertribo {
     @ApiModelProperty()
-    @PrimaryGeneratedColumn({ type: "bigint" })
-    id_supertribo: number;
+    @PrimaryGeneratedColumn({ name: "id_supertribo", type: "bigint" })
+    id: number;
 
     @ApiModelProperty()
     @Column("character varying", {
-        nullable: false,
+        nullable: true,
     })
     nome: string;
 
     @ApiModelProperty()
-    @ManyToOne((type) => Familia, { nullable: false })
-    @JoinColumn({ name: "id_familia", referencedColumnName: "id_familia" })
+    @Column("integer", {
+        nullable: true,
+    })
+    ano_descricao: number;
+
+    @ApiModelProperty()
+    @ManyToOne((type) => Familia, { nullable: true })
+    @JoinColumn({ name: "id_familia", referencedColumnName: "id" })
     public familia: Familia;
 
     @ApiModelProperty()
-    @ManyToOne((type) => Subfamilia, { nullable: false })
-    @JoinColumn({ name: "id_subfamilia", referencedColumnName: "id_subfamilia" })
+    @ManyToOne((type) => Subfamilia, { nullable: true })
+    @JoinColumn({ name: "id_subfamilia", referencedColumnName: "id" })
     public subfamilia: Subfamilia;
+
+    @ApiModelProperty()
+    @OneToMany(() => PessoaSupertribo, (supertribopessoa) => supertribopessoa.supertribo, { cascade: true })
+    public supertribopessoa: PessoaSupertribo[];
 }
 
-@Entity("tribos")
+@Entity("tribo")
 export class Tribo {
     @ApiModelProperty()
-    @PrimaryGeneratedColumn({ type: "bigint" })
-    id_tribo: number;
+    @PrimaryGeneratedColumn({ name: "id_tribo", type: "bigint" })
+    id: number;
 
     @ApiModelProperty()
     @Column("character varying", {
-        nullable: false,
+        nullable: true,
     })
     nome: string;
 
     @ApiModelProperty()
-    @ManyToOne((type) => Familia, { nullable: false })
-    @JoinColumn({ name: "id_familia", referencedColumnName: "id_familia" })
+    @Column("integer", {
+        nullable: true,
+    })
+    ano_descricao: number;
+
+    @ApiModelProperty()
+    @ManyToOne((type) => Familia, { nullable: true })
+    @JoinColumn({ name: "id_familia", referencedColumnName: "id" })
     public familia: Familia;
 
     @ApiModelProperty()
-    @ManyToOne((type) => Subfamilia, { nullable: false })
-    @JoinColumn({ name: "id_subfamilia", referencedColumnName: "id_subfamilia" })
+    @ManyToOne((type) => Subfamilia, { nullable: true })
+    @JoinColumn({ name: "id_subfamilia", referencedColumnName: "id" })
     public subfamilia: Subfamilia;
 
     @ApiModelProperty()
-    @ManyToOne((type) => Supertribo, { nullable: false })
-    @JoinColumn({ name: "id_supertribo", referencedColumnName: "id_supertribo" })
+    @ManyToOne((type) => Supertribo, { nullable: true })
+    @JoinColumn({ name: "id_supertribo", referencedColumnName: "id" })
     public supertribo: Subfamilia;
+
+    @ApiModelProperty()
+    @OneToMany(() => PessoaTribo, (tribopessoa) => tribopessoa.tribo, { cascade: true })
+    public tribopessoa: PessoaTribo[];
 }
 
-@Entity("subtribos")
+@Entity("subtribo")
 export class Subtribo {
     @ApiModelProperty()
-    @PrimaryGeneratedColumn({ type: "bigint" })
-    id_subtribo: number;
+    @PrimaryGeneratedColumn({ name: "id_subtribo", type: "bigint" })
+    id: number;
 
     @ApiModelProperty()
     @Column("character varying", {
-        nullable: false,
+        nullable: true,
     })
     nome: string;
 
     @ApiModelProperty()
-    @ManyToOne((type) => Tribo, { nullable: false })
-    @JoinColumn({ name: "id_tribo", referencedColumnName: "id_tribo" })
+    @Column("integer", {
+        nullable: true,
+    })
+    ano_descricao: number;
+
+    @ApiModelProperty()
+    @ManyToOne((type) => Tribo, { nullable: true })
+    @JoinColumn({ name: "id_tribo", referencedColumnName: "id" })
     public tribo: Tribo;
+
+    @ApiModelProperty()
+    @OneToMany(() => PessoaSubtribo, (subtribopessoa) => subtribopessoa.subtribo, { cascade: true })
+    public subtribopessoa: PessoaSubtribo[];
 }
 
-@Entity("generos")
+@Entity("genero")
 export class Genero {
     @ApiModelProperty()
-    @PrimaryGeneratedColumn({ type: "bigint" })
-    id_genero: number;
+    @PrimaryGeneratedColumn({ name: "id_genero", type: "bigint" })
+    id: number;
 
     @ApiModelProperty()
     @Column("character varying", {
-        nullable: false,
+        nullable: true,
     })
     nome: string;
 
     @ApiModelProperty()
-    @ManyToOne((type) => Familia, { nullable: false })
-    @JoinColumn({ name: "id_familia", referencedColumnName: "id_familia" })
+    @Column("integer", {
+        nullable: true,
+    })
+    ano_descricao: number;
+
+    @ApiModelProperty()
+    @ManyToOne((type) => Familia, { nullable: true })
+    @JoinColumn({ name: "id_familia", referencedColumnName: "id" })
     public familia: Familia;
 
     @ApiModelProperty()
-    @ManyToOne((type) => Tribo, { nullable: false })
-    @JoinColumn({ name: "id_tribo", referencedColumnName: "id_tribo" })
+    @ManyToOne((type) => Tribo, { nullable: true })
+    @JoinColumn({ name: "id_tribo", referencedColumnName: "id" })
     public tribo: Tribo;
 
     @ApiModelProperty()
-    @ManyToOne((type) => Subtribo, { nullable: false })
-    @JoinColumn({ name: "id_subtribo", referencedColumnName: "id_subtribo" })
+    @ManyToOne((type) => Subtribo, { nullable: true })
+    @JoinColumn({ name: "id_subtribo", referencedColumnName: "id" })
     public subtribo: Subtribo;
+
+    @ApiModelProperty()
+    @OneToMany(() => PessoaGenero, (generopessoa) => generopessoa.genero, { cascade: true })
+    public generopessoa: PessoaGenero[];
+
+    @ApiModelProperty()
+    @ManyToMany((type) => Trabalho, (trabalho) => trabalho.generos, { cascade: true })
+    @JoinTable({
+        name: "trabalho_genero",
+        joinColumn: { name: "id_trabalho", referencedColumnName: "id" },
+        inverseJoinColumn: { name: "id_genero", referencedColumnName: "id" },
+    })
+    trabalhos: Trabalho[];
 }
 
-@Entity("subgeneros")
+@Entity("subgenero")
 export class Subgenero {
     @ApiModelProperty()
-    @PrimaryGeneratedColumn({ type: "bigint" })
-    id_subgenero: number;
+    @PrimaryGeneratedColumn({ name: "id_subgenero", type: "bigint" })
+    id: number;
 
     @ApiModelProperty()
     @Column("character varying", {
-        nullable: false,
+        nullable: true,
     })
     nome: string;
 
     @ApiModelProperty()
-    @ManyToOne((type) => Genero, { nullable: false })
-    @JoinColumn({ name: "id_genero", referencedColumnName: "id_genero" })
+    @Column("integer", {
+        nullable: true,
+    })
+    ano_descricao: number;
+
+    @ApiModelProperty()
+    @ManyToOne((type) => Genero, { nullable: true })
+    @JoinColumn({ name: "id_genero", referencedColumnName: "id" })
     public genero: Genero;
+
+    @ApiModelProperty()
+    @OneToMany(() => PessoaSubgenero, (subgeneropessoa) => subgeneropessoa.subgenero, { cascade: true })
+    public subgeneropessoa: PessoaSubgenero[];
 }
 
-@Entity("especies")
+@Entity("especie")
 export class Especie {
     @ApiModelProperty()
-    @PrimaryGeneratedColumn({ type: "bigint" })
-    id_especie: number;
+    @PrimaryGeneratedColumn({ name: "id_especie", type: "bigint" })
+    id: number;
 
     @ApiModelProperty()
     @Column("character varying", {
-        nullable: false,
+        nullable: true,
     })
     nome: string;
 
     @ApiModelProperty()
-    @ManyToOne((type) => Genero, { nullable: false })
-    @JoinColumn({ name: "id_genero", referencedColumnName: "id_genero" })
+    @Column("integer", {
+        nullable: true,
+    })
+    ano_descricao: number;
+
+    @ApiModelProperty()
+    @ManyToOne((type) => Genero, { nullable: true })
+    @JoinColumn({ name: "id_genero", referencedColumnName: "id" })
     public genero: Genero;
 
     @ApiModelProperty()
-    @ManyToOne((type) => Subgenero, { nullable: false })
-    @JoinColumn({ name: "id_subgenero", referencedColumnName: "id_subgenero" })
+    @ManyToOne((type) => Subgenero, { nullable: true })
+    @JoinColumn({ name: "id_subgenero", referencedColumnName: "id" })
     public subgenero: Subgenero;
 
     @ApiModelProperty()
-    @ManyToOne((type) => Pessoa, { nullable: false })
-    @JoinColumn({ name: "id_pessoa", referencedColumnName: "id_pessoa" })
+    @ManyToOne((type) => Pessoa, { nullable: true })
+    @JoinColumn({ name: "id_pessoa", referencedColumnName: "id" })
     public pessoa: Pessoa;
 
     @ApiModelProperty()
     @ManyToOne((type) => Especie)
-    @JoinColumn({ name: "parent_id_especie", referencedColumnName: "id_especie" })
+    @JoinColumn({ name: "parent_id_especie", referencedColumnName: "id" })
     public parent_id_especie: Especie;
+
+    @ApiModelProperty()
+    @OneToMany(() => PessoaEspecie, (especiepessoa) => especiepessoa.especie, { cascade: true })
+    public especiepessoa: PessoaEspecie[];
+
+    @ApiModelProperty()
+    @ManyToMany((type) => Trabalho, (trabalho) => trabalho.especies, { cascade: true })
+    @JoinTable({
+        name: "trabalho_especie",
+        joinColumn: { name: "id_trabalho", referencedColumnName: "id" },
+        inverseJoinColumn: { name: "id_especie", referencedColumnName: "id" },
+    })
+    trabalhos: Trabalho[];
 }

@@ -3,27 +3,27 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, JoinColum
 import { ApiModelProperty } from "@nestjs/swagger";
 import { Localidade } from "../../localidades/localidades/localidade.entity";
 
-@Entity("enderecos")
+@Entity("endereco")
 export class Endereco {
     @ApiModelProperty()
-    @PrimaryGeneratedColumn({ type: "bigint" })
-    id_endereco: number;
+    @PrimaryGeneratedColumn({ name: "id_endereco", type: "bigint" })
+    id: number;
 
     @ApiModelProperty()
     @Column("character varying", {
-        nullable: false,
+        nullable: true,
     })
     bairro: string;
 
     @ApiModelProperty()
     @Column("character varying", {
-        nullable: false,
+        nullable: true,
     })
     logradouro: string;
 
     @ApiModelProperty()
     @Column("character varying", {
-        nullable: false,
+        nullable: true,
     })
     outro: string;
 
@@ -33,6 +33,6 @@ export class Endereco {
 
     @ApiModelProperty()
     @ManyToOne((type) => Localidade, { nullable: true })
-    @JoinColumn({ name: "id_localidade", referencedColumnName: "id_localidade" })
+    @JoinColumn({ name: "id_localidade", referencedColumnName: "id" })
     public localidade: Localidade;
 }

@@ -5,46 +5,46 @@ import { ApiModelProperty } from "@nestjs/swagger";
 
 @Entity("colecao")
 export class Colecao {
-    @PrimaryGeneratedColumn({ type: "bigint" })
-    id_colecao: number;
+    @PrimaryGeneratedColumn({ name: "id_colecao", type: "bigint" })
+    id: number;
 
     @ApiModelProperty()
-    @ManyToOne((type) => Endereco, { nullable: false })
-    @JoinColumn({ name: "id_endereco", referencedColumnName: "id_endereco" })
+    @ManyToOne((type) => Endereco, { nullable: true })
+    @JoinColumn({ name: "id_endereco", referencedColumnName: "id" })
     public endereco: Endereco;
 
     @ApiModelProperty()
-    @ManyToOne((type) => Instituicao, { nullable: false })
-    @JoinColumn({ name: "id_instituicao", referencedColumnName: "id_instituicao" })
+    @ManyToOne((type) => Instituicao, { nullable: true })
+    @JoinColumn({ name: "id_instituicao", referencedColumnName: "id" })
     public instituicao: Instituicao;
 
     @ApiModelProperty()
     @Column("character varying", {
-        nullable: false,
+        nullable: true,
     })
     website: string;
 
     @ApiModelProperty()
     @Column("character varying", {
-        nullable: false,
+        nullable: true,
     })
     anotacao: string;
 
     @ApiModelProperty()
     @Column("boolean", {
-        nullable: false,
+        nullable: true,
     })
     colecao_pessoal: boolean;
 
     @ApiModelProperty()
     @Column("character varying", {
-        nullable: false,
+        nullable: true,
     })
     acronimo: string;
 
     @ApiModelProperty()
     @Column("character varying", {
-        nullable: false,
+        nullable: true,
     })
     nome_completo: string;
 }

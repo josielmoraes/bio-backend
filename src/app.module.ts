@@ -8,6 +8,7 @@ import { LocalidadesModule } from "./localidades/localidades.module";
 import { InstituicoesModule } from "./instituicoes/instituicoes.module";
 import { TaxonomiasModule } from "./taxonomias/taxonomias.module";
 import { RegistrosModule } from "./registros/registros.module";
+import { TrabalhosModule } from './trabalhos/trabalhos.module';
 
 @Module({
     imports: [
@@ -18,8 +19,9 @@ import { RegistrosModule } from "./registros/registros.module";
             username: "postgres",
             password: "jlm12345",
             database: "bio",
+            schema: 'test',
             entities: [__dirname + "/**/*.entity{.ts,.js}"],
-            synchronize: false,
+            synchronize: true,
         }),
         PessoasModule,
         EnderecosModule,
@@ -27,6 +29,7 @@ import { RegistrosModule } from "./registros/registros.module";
         InstituicoesModule,
         TaxonomiasModule,
         RegistrosModule,
+        TrabalhosModule,
     ],
     controllers: [AppController],
     providers: [AppService],
